@@ -23,10 +23,24 @@
       text-align: right;
       size: 18px;
     }
+      .green-heading {
+        color: green;
+      }
     p {
       font-family: "Comic Sans MS", sans-serif;
-    }   
-    
+    }
+    .blue-italic-underline {
+      color: blue;
+      font-style: italic;
+      text-decoration: underline;
+    }
+    #last-quote {
+      border: 3px dotted red;
+      padding: 10px;
+    }
+    /* #Quote-Three {
+      color:green;
+    } */
   </style>
   <body>
     <h1>This line demonstrates h1</h1>
@@ -34,25 +48,25 @@
     <h3>This line shows how h3 will be different from h1 and h2</h3>
     <hr />
     <h1>Quote One from Winston Churchill</h1>
-    <p>
+    <p class="blue-italic-underline">
       Criticism may not be agreeable, but it is necessary. It fulfils the same
       function as pain in the human body. It calls attention to an unhealthy
       state of things.
     </p>
-    <h3>Quote Two from Winston Churchill</h3>
+  <h3 class="blue-italic-underline">Quote Two from Winston Churchill</h3>
     <p>
       Courage is rightly esteemed the first of human qualities... because it is
       the quality which guarantees all others. Courage is what it takes to stand
       up and speak; courage is also what it takes to sit down and listen.
     </p>
-    <h2>Quote Three from Winston Churchill</h2>
+    <h2 class="green-heading">Quote Three from Winston Churchill</h2>
     <h3>This paragraph will have a border</h3>
-    <p>
+    <p id="last-quote">
       Continuous effort - not strength or intelligence - is the key to unlocking
       our potential.
     </p>
     <hr />
-    <p>
+    <p class="blue-italic-underline">
       The tiger (Panthera tigris) is the largest cat species, reaching a total
       body length of up to 3.3 metres (11 ft) and weighing up to 306 kg (670
       lb). It is the third largest land carnivore (behind only the Polar bear
