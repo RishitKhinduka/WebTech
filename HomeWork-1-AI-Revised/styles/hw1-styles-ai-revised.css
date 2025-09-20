@@ -1,0 +1,58 @@
+/* As for the CSS, Copilot simplified a lot of things. 
+Firstly, my removing the universal selector ‘*’ in the 
+original styles page and adding a ‘body’ styles section 
+on it. It also changed the background to be lighter than 
+the original light grey. Copilot also changed the color 
+of the headings, making them contrast better with the 
+background while also adding new interesting styles like 
+the hover effect for links, which made them quite more 
+appealing than the initial one.  */
+
+body {
+  background-color: #f7f7fa;
+  color: #222;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0 0 32px 0;
+}
+
+h2 {
+  color: #2a4d7a;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  text-decoration: underline;
+  text-align: center;
+  margin: 16px 0 18px 0;
+}
+
+h2 {
+  color: purple;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  text-decoration: underline;
+  text-align: center;
+  size: 23px;
+}
+
+.links {
+  border: 2px dotted #e6b800;
+  padding: 14px 0;
+  text-align: center;
+  text-decoration: underline;
+  background: #fffbe6;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.links a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.links a:hover {
+  background: #e0eaff;
+  color: #222;
+}
