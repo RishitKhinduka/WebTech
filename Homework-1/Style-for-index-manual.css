@@ -1,9 +1,31 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: lightgray;
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: purple;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-style: italic;
+      text-decoration: underline;
+      text-align: center;
+      size: 23px;
+    }
+
 h2 {
       color: purple;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-style: italic;
       text-decoration: underline;
       text-align: center;
+      size: 23px;
     }
 
  .links {
@@ -16,10 +38,24 @@ h2 {
   .center-list {
   text-align: center;
 }
+
   img {
-      float: center;
-      margin-left: 0px;
-      margin-right: 0px;
+      display: block;
+      margin: auto;
       border: 5px solid #4c057b;
       border-radius: 10px;
+    }
+
+     p {
+      font-family: "Times New Roman", serif;
+      font-size: 18px;
+      text-align: center;
+      margin: 20px;
+    }
+    
+    h3 {
+      color: midnightblue;
+      font-family: "Times New Roman", serif;
+      text-align: center;
+      size: 20px;
     }

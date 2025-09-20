@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { 
+            padding: 0;
+            margin: 0; 
+        }
+        .clock, .date {
+            font-size: 3.5em;
+            font-family: 'Arial', sans-serif;
+            color: black;
+            text-align: center; 
+            background-color: grey;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: lightblue;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+  <div class="clock">15:42:22</div> 
+  <div class="date">9/18/2025</div>
+  </div> 
+</body>
+</html>
