@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="https://oim.108122.xyz/form2">
+      <input
+        type="text"
+        name="name"
+        placeholder="Enter your full name here..."
+      />
+      <button type="submit">Send</button>
+</form>
+
+<form>
+  <label for="username">Username:</label>
+  <input
+    type="text"
+    id="username"
+    name="username"
+    maxlength="100"
+    placeholder="Username"
+  />
+  <button type="submit">Send</button>
+</form>
+
+<form>
+  <label for="password">Password:</label>
+  <input
+    type="text"
+    id="password"
+    name="password"
+    maxlength="100"
+    placeholder="password"
+  />
+  <button type="submit">Send</button>
+</form>
+
+<form>
+<div>
+    Gender:
+    <label>Male
+    <input type="radio" name="gender" value="male" />
+    </label>
+    <label>Female
+    <input type="radio" name="gender" value="female" />
+    </label>
+</div>
+</form>
+
+<div>What product(s) do you own?</div>
+<div>
+<input type="checkbox" id="smartphone" name="products" value="smartphone" />
+<label for="smartphone">Smartphone</label>
+</div>
+<div>
+<input type="checkbox" id="desktop" name="products" value="desktop"/>
+<label for="desktop">Desktop computer</label>
+</div>
+<div>
+<input type="checkbox" id="laptop" name="products" value="laptop"
+checked />
+<label for="laptop">Laptop computer</label>
+</div>
+
+<div>
+<div>
+    <label for="state-select">Which state do you live in?</label>
+</div>
+<div>
+    <select name="state" id="state-select">
+    <option value="">-- Please select your state --</option>
+    <option value="ME">Maine</option>
+    <option value="MA">Massachusetts</option>
+    <option value="NH">New Hampshire</option>
+    </select>
+</div>
+
+
+<div>
+<div>
+    <label for="comments">Leave a Reply:</label>
+</div>
+<div>
+    <textarea
+    id="comments"
+    name="comments"
+    rows="5"
+    cols="25"
+    placeholder="Enter your comment here..."
+    ></textarea>
+</div>
+</div>
+
+<button type="submit">
+        SUBMIT <img src="images/mailbox.png"  
+                    height="30" 
+                    alt="submit button" />
+</button>
+
+
+<!-- <input type="submit" value="Submit" />
+<input type="reset" value="Reset" /> -->
+
+</body>
+</html>
