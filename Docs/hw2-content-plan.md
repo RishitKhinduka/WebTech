@@ -11,6 +11,7 @@
     - Contact(contact.html)
 
 - **Footer:**
+  - Name - Rishit Khinduka 
   - Basic contact details like social media, github or linkedIn
 
 - **Styling:**
