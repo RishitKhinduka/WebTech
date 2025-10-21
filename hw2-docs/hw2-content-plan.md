@@ -17,7 +17,7 @@
 - **Styling:**
   - Luxury Designer themed: Combination of purple and gold color tone
   - Serif and Sans-serif font combinations 
-  - Hover transitions
+  - Hover transitions 
 
 # 2- Home Page: index.html
 
