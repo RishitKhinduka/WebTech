@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exercise 15</title>
+  <style>
+      h1 {
+          text-align: center;
+      }
+      img {
+          border: 5px ridge gold;
+          display: block;
+      }
+      div, img {
+          width: 400px;
+          margin: 20px auto;
+      }
+  </style>
+</head>
+<body>
+  <h1>Who is your favorite Celtics Player?</h1>
+  <img src="Images/Celtics.png" alt="Click here to choose the image" title="Celtics"/>
+  <div>
+    Enter the last name of your favorite Celtics player:
+    <ul>
+      <li>Jaylen Brown</li>
+      <li>Jayson Tatum</li>
+      <li>Al Horford</li>
+      <li>Payton Pritchard</li>
+    </ul>
+  </div>
+
+  <script>
+    
+  const celticsImg = document.querySelector("img");
+
+    // celticsImg.addEventListener("click", () => {
+    //     const player = prompt("Enter the last name of your favorite Celtics player (Brown, Tatum, Horford, Pritchard):");
+    
+    //     let imgPath = "";
+    //     switch (player.toLowerCase()) {
+    //         case "brown":
+    //             imgPath = "Classwork/Images/Jaylen-Brown.png";
+    //             break;
+    //         case "tatum":
+    //             imgPath = "Classwork/Images/Jayson-Tatum.png";
+    //             break;
+    //         case "horford":
+    //             imgPath = "Classwork/Images/Al-Horford.png";
+    //             break;
+    //         case "pritchard":
+    //             imgPath = "Classwork/Images/Payton-Pritchard.png";
+    //             break;
+    //         default:
+    //             alert("Player not recognized. Please enter Brown, Tatum, Horford, or Pritchard.");
+    //             return;
+    //     }
+    
+    //     celticsImg.src = imgPath;
+    // });
+
+    const players = {
+        Brown: "Images/Jaylen-Brown.png",
+        Tatum: "Images/Jayson-Tatum.png",
+        Horford: "Images/Al-Horford.png",
+        Pritchard: "Images/Payton-Pritchard.png"
+    }
+
+    celticsImg.addEventListener("click", function () {
+      const name = prompt("Who is your favorite Celtics player? Please enter Last Name)");
+
+      if (name === "Brown") {
+    celticsImg.src = "Images/Jaylen-Brown.png"; celticsImg.alt = "Jayson Tatum";
+  } else if (name === "Tatum") {
+    celticsImg.src = "Images/Jayson-Tatum.png"; celticsImg.alt = "Jaylen Brown";
+  } else if (name === "Horford") {
+    celticsImg.src = "Images/Al-Horford.png"; celticsImg.alt = "Al Horford";
+  } else if (name === "Pritchard") {
+    celticsImg.src = "Images/Payton-Pritchard.png"; celticsImg.alt = "Payton Pritchard";
+  } else {
+    alert("Error message: Player not found.");
+  }
+    });
+
+</script>
+
+</body>
+</html>
