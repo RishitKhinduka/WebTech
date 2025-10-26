@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form action="">
+    <div>X = <input type="text" name= "x" id="X"/></div>
+    <div>Y = <input type="text" name= "y" id="Y"/></div>
+    <button>Click</button>
+</form>
+<p id= "result"></p>
+
+    <script>
+    const btn = document.querySelector("button");
+    const result = document.querySelector("#result");
+
+    function calculate(event) {
+      event.preventDefault(); 
+
+      const a = document.querySelector("#X").value;
+      const b = document.querySelector("#Y").value;
+
+      if (a.length === 0 || b.length === 0) {
+        result.textContent = "Please enter valid numbers";
+      } else if (isNaN(a) || isNaN(b)) {
+        result.textContent = "Please enter valid numbers";
+      } else {
+        const sum = parseFloat(a) + parseFloat(b);
+        const subs = parseFloat(a) - parseFloat(b);
+        const mult = parseFloat(a) * parseFloat(b);
+        const div = parseFloat(a) / parseFloat(b);
+
+        result.innerHTML = `
+          <div>${a} + ${b} = ${sum}</div>
+          <div>${a} - ${b} = ${subs}</div>
+          <div>${a} * ${b} = ${mult}</div>
+          <div>${a} / ${b} = ${div}</div>
+        `;
+      }
+    }
+    btn.addEventListener("click", calculate);
+  </script>
+</body>
+</html>

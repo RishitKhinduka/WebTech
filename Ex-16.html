@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+</head>
+<body>
+  <h1>Calculator Exercise</h1>
+
+  <form id="calcForm">
+    <div>
+      X = <input type="text" id="X" />
+    </div>
+    <div>
+      Y = <input type="text" id="Y" />
+    </div>
+
+    <div>
+      Operation:
+      <select id="operation">
+        <option value="add">Addition (+)</option>
+        <option value="sub">Subtraction (-)</option>
+        <option value="mul">Multiplication (×)</option>
+        <option value="div">Division (÷)</option>
+      </select>
+    </div>
+
+    <button>Calculate</button>
+  </form>
+  <p id="result"></p>
+
+  <script>
+
+    const btn = document.querySelector("button");
+    const result = document.querySelector("#result");
+
+    function calculate(event) {
+      event.preventDefault();
+      const a = document.querySelector("#X").value;
+      const b = document.querySelector("#Y").value;
+      const operation = document.querySelector("#operation").value;
+
+      const n1 = parseFloat(a);
+      const n2 = parseFloat(b);
+
+   
+      if (a.length === 0 || b.length === 0) {
+        result.textContent = "Please enter valid numbers";
+        return; 
+      } else if (isNaN(a) || isNaN(b)) {
+        result.textContent = "Please enter valid numbers";
+        return;
+      }
+
+      let answer;
+
+      if (operation === "add") {
+        answer = n1 + n2;
+      } else if (operation === "sub") {
+        answer = n1 - n2;
+      } else if (operation === "mul") {
+        answer = n1 * n2;
+      } else if (operation === "div") {
+        answer = num1 / num2;
+      }
+
+      result.textContent = `Result: ${answer}`;
+    }
+
+    btn.addEventListener("click", calculate);
+  </script>
+</body>
+</html>
