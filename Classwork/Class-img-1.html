@@ -29,7 +29,7 @@
         const ctx = myCanvas.getContext("2d");
 
         const rgbInfo = document.getElementById("rgb-info");
-
+      });
         // When the image has loaded, draw it on the canvas
         image.onload = function () {
           // Resize canvas to match the image size
@@ -85,24 +85,24 @@
             myCanvas.height
           );
 
-          // // Loop through every pixel (RGBA = 4 values per pixel)
-          // for (let i = 0; i < imgData.data.length; i += 4) {
-          //   // Example: to emphasize red, you could zero out G and B like this:
-          //   imgData.data[i + 1] = 0; // green
-          //   imgData.data[i + 2] = 0; // blue
-          // }
-       for (let i = 0; i < imgData.data.length; i += 4) {
+          // Loop through every pixel (RGBA = 4 values per pixel)
+          for (let i = 0; i < imgData.data.length; i += 4) {
             // Example: to emphasize red, you could zero out G and B like this:
-            imgData.data[i] = 255 - imgData.data[i];     // red
-            imgData.data[i + 1] = 255 - imgData.data[i + 1]; // green
-            imgData.data[i + 2] = 255 - imgData.data[i + 2]; // blue
-          // Put modified pixel data back onto the canvas
-          ctx.putImageData(imgData, 0, 0);
-        }
+            imgData.data[i + 1] = 0; // green
+            imgData.data[i + 2] = 0; // blue
+          }
+      //  for (let i = 0; i < imgData.data.length; i += 4) {
+      //     //   // Example: to emphasize red, you could zero out G and B like this:
+      //     //   imgData.data[i] = 255 - imgData.data[i];     // red
+      //     //   imgData.data[i + 1] = 255 - imgData.data[i + 1]; // green
+      //     //   imgData.data[i + 2] = 255 - imgData.data[i + 2]; // blue
+      //     // // Put modified pixel data back onto the canvas
+      //     // ctx.putImageData(imgData, 0, 0);
+      //   }
 
         // Attach button to the filter function
         document.getElementById("btn-1").addEventListener("click", redFilter);
-      });
+      };
     </script>
   </body>
 </html>
