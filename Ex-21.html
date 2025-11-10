@@ -10,47 +10,98 @@
         background-color: #f7f7f7;
         font-family: Arial, sans-serif;
       }
-      img {
+      #slideshow-img {
         width: 400px;
         height: 250px;
         border: 3px solid black;
         margin-top: 30px;
+        object-fit: cover;
+      }
+      #caption {
+        margin-top: 8px;
+        font-weight: bold;
+        color: #333;
+      }
+      #controls {
+        margin-top: 12px;
+      }
+      button {
+        padding: 8px 14px;
+        border-radius: 6px;
+        border: none;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
       }
     </style>
   </head>
 
   <body>
-    <h1>Slideshow Example</h1>
-    <img id="tiger" src="Classwork/Images/tiger1.jpg" alt="Slideshow Image" />
+    <h1>Tiger Slideshow</h1>
+
+    <img id="slideshow-img" src="" alt="Slideshow Image" />
+    <div id="caption">Caption</div>
+
+    <div id="controls">
+      <button id="btn">Stop Slideshow</button>
+    </div>
 
     <script>
+      // 🔹 Change the paths below depending on where your images are stored
+      const slides = [
+        "images/tiger1.jpg",
+        "images/tiger2.jpg",
+        "images/tiger3.jpg"
+      ];
 
-      const slides = ["images/tiger1.jpg", "images/tiger2.jpg", "images/tiger3.jpg"];
+      const captions = [
+        "Tiger walking",
+        "Tiger resting in grass",
+        "Tiger looking toward us"
+      ];
 
-      // Step 2: Keep track of which image we are on
       let currentSlideIndex = 0;
+      let intervalId = null;
+      const intervalMs = 2000;
 
-      // Step 3: Function to change the image
-      function changeSlide() {
-        const img = document.getElementById("tiger");
-
-        // If we reach the end of the array, go back to the first image
-        if (currentSlideIndex === slides.length) {
-          currentSlideIndex = 0;
-        }
-
-        // Update image source
-        img.src = slides[currentSlideIndex];
-
-        // Move to the next image next time
-        currentSlideIndex++;
-
-        // Call this function again after 1 second (1000 milliseconds)
-        setTimeout(changeSlide, 1000);
+      function showSlide(index) {
+        const img = document.getElementById("slideshow-img");
+        const cap = document.getElementById("caption");
+        img.src = slides[index];
+        img.alt = captions[index];
+        cap.textContent = captions[index];
       }
 
-      // Step 4: Start the slideshow when the page loads
-      document.addEventListener("DOMContentLoaded", changeSlide);
+      function nextSlide() {
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        showSlide(currentSlideIndex);
+      }
+
+      function startSlideshow() {
+        if (intervalId) return;
+        intervalId = setInterval(nextSlide, intervalMs);
+        document.getElementById("btn").textContent = "Stop Slideshow";
+      }
+
+      function stopSlideshow() {
+        if (!intervalId) return;
+        clearInterval(intervalId);
+        intervalId = null;
+        document.getElementById("btn").textContent = "Start Slideshow";
+      }
+
+      document.getElementById("btn").addEventListener("click", function () {
+        if (intervalId) {
+          stopSlideshow();
+        } else {
+          startSlideshow();
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        showSlide(currentSlideIndex);
+        startSlideshow();
+      });
     </script>
   </body>
 </html>
