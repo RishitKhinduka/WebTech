@@ -47,27 +47,19 @@
     </div>
 
     <script>
-      // 🔹 Change the paths below depending on where your images are stored
-      const slides = [
-        "images/tiger1.jpg",
-        "images/tiger2.jpg",
-        "images/tiger3.jpg"
-      ];
+      const slides = ["tiger1.jpg", "tiger2.jpg", "tiger3.jpg"];
 
-      const captions = [
-        "Tiger walking",
-        "Tiger resting in grass",
-        "Tiger looking toward us"
-      ];
+      const captions = ["Tiger walking","Tiger resting in grass","Tiger looking toward us"];
 
       let currentSlideIndex = 0;
       let intervalId = null;
-      const intervalMs = 2000;
+      const intervalMs = 2000; 
 
       function showSlide(index) {
         const img = document.getElementById("slideshow-img");
         const cap = document.getElementById("caption");
         img.src = slides[index];
+        img.alt = captions[index] || "Slideshow image";
         img.alt = captions[index];
         cap.textContent = captions[index];
       }
@@ -99,9 +91,11 @@
       });
 
       document.addEventListener("DOMContentLoaded", function () {
+        currentSlideIndex = 0;
         showSlide(currentSlideIndex);
         startSlideshow();
       });
+
     </script>
   </body>
 </html>

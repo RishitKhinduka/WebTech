@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolling Dine</title>
+    </head>
+    <body>
+        <button>Roll</button>
+        <p id="result">?</p>
+        <img src="Images/dice.png" alt="" height="30" />
+
+        <script>
+            const btn = document.querySelector('button');
+            const result = document.querySelector('#result');
+            const img = document.querySelector('img');
+
+            function rollDice() {
+                console.log("Rolling the dice...");
+                const number = Math.floor(Math.random() * 6) + 1;
+                // alert(`You rolled a ${die}`);
+                result.textContent = number;
+                img.src = `Images/dice${number}.png`;
+            }
+
+            function rollsDice() {
+                // Simulate rolling 100 dice and calculate sum and average 
+                let sum = 0;
+                for (let i = 0; i < 100; i++) {
+                    let number = Math.floor(Math.random() * 6) + 1; 
+                    sum += number;
+                }
+                const average = sum / 100;
+                result.textContent = `Sum: ${sum}, Average: ${average}`;
+            }
+            btn.addEventListener("click", () => {
+                rollsDice();
+            });
+        </script>
+    </body> 
+</html>
