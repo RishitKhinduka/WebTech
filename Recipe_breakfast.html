@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Breakfast — Easy Dorm Recipes</title>
+  <style>
+    :root{
+      --bg:#fff; --card:#fff; --text:#0f1724; --muted:#6b7280; --accent:#d97706; --shadow:0 10px 30px rgba(2,6,23,0.06); --radius:12px; --maxw:1100px;
+    }
+    :root.dark{
+      --bg:#071023; --card:#071428; --text:#e6eef8; --muted:#9aa6b2; --accent:#f59e0b; --shadow:0 10px 30px rgba(3,6,12,0.6);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:var(--bg)}
+    .large-text{font-size:1.125rem}
+    .container{max-width:1100px;margin:0 auto;padding:1rem}
+    header.site-header{background:var(--card);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(0,0,0,0.06)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.75rem 1rem}
+    .brand{font-weight:700;color:var(--accent);font-size:1.1rem}
+    nav ul{display:flex;gap:.5rem;list-style:none;padding:0;margin:0}
+    nav a{display:inline-block;padding:.5rem .7rem;border-radius:8px;text-decoration:none;color:var(--text)}
+    nav a:hover,nav a:focus{box-shadow:0 0 0 4px rgba(37,99,235,0.12)}
+    .toggles{display:flex;gap:.4rem;align-items:center}
+    main{padding:1.5rem 1rem}
+    .recipe-layout{display:grid;grid-template-columns:1fr 420px;gap:1.5rem;align-items:start}
+    .card{background:var(--card);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04)}
+    h1{margin:.25rem 0;font-size:1.6rem}
+    .meta{color:var(--muted);margin-bottom:.6rem}
+    .recipe-img{width:100%;height:320px;overflow:hidden;border-radius:8px}
+    .recipe-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
+    .ingredients-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin-top:1rem}
+    .ing-tile{position:relative;border-radius:10px;overflow:hidden;height:120px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s ease}
+    .ing-tile img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.05);transition:transform .25s ease}
+    .ing-label{position:absolute;left:0;right:0;bottom:0;padding:.5rem;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.55));color:white;font-weight:600;transform:translateY(110%);transition:transform .18s}
+    .ing-tile:hover .ing-label, .ing-tile:focus .ing-label{transform:translateY(0)}
+    .ing-tile:hover img{transform:scale(1.12)}
+    .instructions{margin-top:1rem}
+    .actions{display:flex;gap:.5rem;margin-top:1rem}
+    .btn{background:var(--accent);color:white;padding:.5rem .75rem;border-radius:8px;border:0;cursor:pointer}
+    @media (max-width:920px){ .recipe-layout{grid-template-columns:1fr} .recipe-img{height:260px} }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner container">
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <div class="brand">Easy Dorm Recipes</div>
+        <nav aria-label="Main">
+          <ul>
+            <li><a href="Recipe_index.html">Home</a></li>
+            <li><a href="Recipe_breakfast.html" aria-current="page">Breakfast</a></li>
+            <li><a href="Recipe_lunch.html">Lunch</a></li>
+            <li><a href="Recipe_dinner.html">Dinner</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="toggles">
+        <label title="Increase text size"><input id="text-toggle" type="checkbox" aria-label="Toggle larger text"/> A+</label>
+        <label title="Dark mode" style="display:inline-flex;align-items:center;gap:.4rem"><input id="dark-toggle" type="checkbox" aria-label="Toggle dark mode"/> Dark</label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="main">
+    <!-- Overnight Oats -->
+    <article class="recipe-layout card" id="overnight-oats" aria-labelledby="ov-title">
+      <div>
+        <h1 id="ov-title">Overnight Oats</h1>
+        <div class="meta">1 serving • 2 minutes prep (refrigerate 4+ hours)</div>
+
+        <div>
+          <strong>Ingredients</strong>
+          <div class="ingredients-grid" id="ov-ingredients">
+            <!-- ingredient tiles inserted by JS -->
+          </div>
+        </div>
+
+        <div class="instructions">
+          <strong>Instructions</strong>
+          <ol>
+            <li>Combine: add oats, milk, chia seeds, maple syrup, and salt to a jar.</li>
+            <li>Mix: Stir thoroughly.</li>
+            <li>Chill: Put lid on and refrigerate at least 4 hours or overnight.</li>
+            <li>Serve: Stir and enjoy cold; add more milk if too thick.</li>
+          </ol>
+        </div>
+
+        <div class="actions">
+          <button class="btn" onclick="printRecipe('overnight-oats')">Print Recipe</button>
+        </div>
+      </div>
+
+      <aside class="recipe-img" aria-hidden="false">
+        <img src="https://images.unsplash.com/photo-1509475826633-fed577a2c71b?q=80&w=1200&auto=format&fit=crop" alt="Overnight oats" />
+      </aside>
+    </article>
+
+    <!-- Avocado Toast -->
+    <article class="recipe-layout card" id="avocado-toast" aria-labelledby="av-title" style="margin-top:1.25rem">
+      <div>
+        <h1 id="av-title">Avocado Toast</h1>
+        <div class="meta">1 serving • ~5 minutes</div>
+
+        <div>
+          <strong>Ingredients</strong>
+          <div class="ingredients-grid" id="av-ingredients"></div>
+        </div>
+
+        <div class="instructions">
+          <strong>Instructions</strong>
+          <ol>
+            <li>Toast bread until golden and crisp.</li>
+            <li>Scoop avocado, mash, and season with salt & lemon.</li>
+            <li>Spread on toast and drizzle olive oil.</li>
+          </ol>
+        </div>
+
+        <div class="actions">
+          <button class="btn" onclick="printRecipe('avocado-toast')">Print Recipe</button>
+        </div>
+      </div>
+
+      <aside class="recipe-img"><img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=1200&auto=format&fit=crop" alt="Avocado toast" /></aside>
+    </article>
+  </main>
+
+  <footer style="padding:1rem;text-align:center;color:var(--muted)"><small>© Easy Dorm Recipes</small></footer>
+
+  <script>
+    // page-level recipe data (only ingredients used to render grid)
+    const RECIPES = {
+      'overnight-oats': {
+        ingredients:[
+          '½ cup Old-Fashioned Rolled Oats',
+          '½ cup Milk of choice',
+          '1 tbsp Chia Seeds (optional)',
+          '1 tsp Maple Syrup or Honey (optional)',
+          'Pinch of Salt'
+        ]
+      },
+      'avocado-toast': {
+        ingredients:[
+          '½ ripe Avocado',
+          '1 slice bread',
+          'Pinch of Salt',
+          'Lemon juice (optional)',
+          'Drizzle Olive Oil (optional)'
+        ]
+      }
+    };
+
+    // ingredient tile images (placeholder maps)
+    const ING_IMG = {
+      'oats':'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop',
+      'milk':'https://images.unsplash.com/photo-1514986888952-8cd320577b47?q=80&w=800&auto=format&fit=crop',
+      'chia':'https://images.unsplash.com/photo-1589388926168-0d7d4b1faa0d?q=80&w=800&auto=format&fit=crop',
+      'maple':'https://images.unsplash.com/photo-1505575967451-3e5b5a3e1d86?q=80&w=800&auto=format&fit=crop',
+      'salt':'https://images.unsplash.com/photo-1505576391880-0d3e2b637b1b?q=80&w=800&auto=format&fit=crop',
+      'avocado':'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=800&auto=format&fit=crop',
+      'bread':'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+      'lemon':'https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=800&auto=format&fit=crop',
+      'olive':'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop'
+    };
+
+    // render ingredient grids
+    function renderIngredients(containerId, items){
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      items.forEach((txt, idx) => {
+        const div = document.createElement('button');
+        div.className = 'ing-tile';
+        div.type = 'button';
+        // try to match a key from text
+        const key = Object.keys(ING_IMG).find(k => txt.toLowerCase().includes(k)) || 'bread';
+        const img = document.createElement('img');
+        img.src = ING_IMG[key];
+        img.alt = txt;
+        const label = document.createElement('div');
+        label.className = 'ing-label';
+        label.innerText = txt;
+        div.appendChild(img);
+        div.appendChild(label);
+        // keyboard focus for accessibility
+        div.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); div.click(); } });
+        div.addEventListener('click', ()=> { alert(txt); });
+        container.appendChild(div);
+      });
+    }
+
+    // populate both recipe grids
+    document.addEventListener('DOMContentLoaded', ()=>{
+      renderIngredients('ov-ingredients', RECIPES['overnight-oats'].ingredients);
+      renderIngredients('av-ingredients', RECIPES['avocado-toast'].ingredients);
+
+      // toggles persistent
+      const root = document.documentElement;
+      const darkToggle = document.getElementById('dark-toggle');
+      const textToggle = document.getElementById('text-toggle');
+      const dark = localStorage.getItem('edr_dark') === 'true';
+      const large = localStorage.getItem('edr_large') === 'true';
+      if(dark) root.classList.add('dark'), darkToggle.checked = true;
+      if(large) document.body.classList.add('large-text'), textToggle.checked = true;
+      darkToggle.addEventListener('change', e=>{ if(e.target.checked) root.classList.add('dark'); else root.classList.remove('dark'); localStorage.setItem('edr_dark', e.target.checked); });
+      textToggle.addEventListener('change', e=>{ if(e.target.checked) document.body.classList.add('large-text'); else document.body.classList.remove('large-text'); localStorage.setItem('edr_large', e.target.checked); });
+    });
+
+    // print recipe helper: print only the article with id
+    function printRecipe(articleId){
+      const node = document.getElementById(articleId);
+      if(!node) return;
+      const win = window.open('','_blank','width=700,height=900');
+      const style = document.createElement('style');
+      style.textContent = `
+        body{font-family:Arial,Helvetica,sans-serif;padding:20px;color:#111}
+        h1{font-size:22px}
+        ul,ol{margin-left:1rem}
+      `;
+      win.document.write('<!doctype html><html><head><title>Print</title></head><body></body></html>');
+      win.document.head.appendChild(style);
+      win.document.body.innerHTML = node.innerHTML;
+      win.document.close();
+      setTimeout(()=> win.print(),300);
+    }
+  </script>
+</body>
+</html>

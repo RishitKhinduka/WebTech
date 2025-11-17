@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Easy Dorm Recipes — Home</title>
+  <style>
+    :root{
+      --bg:#ffffff; --card:#ffffff; --text:#0f1724; --muted:#6b7280; --accent:#d97706;
+      --shadow: 0 10px 30px rgba(2,6,23,0.08);
+      --focus: rgba(37,99,235,0.14);
+      --radius:12px;
+      --maxw:1100px;
+      --gap:1rem;
+    }
+    :root.dark{
+      --bg:#071023; --card:#071428; --text:#e6eef8; --muted:#9aa6b2; --accent:#f59e0b;
+      --shadow: 0 10px 30px rgba(3,6,12,0.6);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+    .large-text{font-size:1.125rem}
+    .container{max-width:var(--maxw);margin:0 auto;padding:1rem}
+    header.site-header{background:var(--card);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(0,0,0,0.06)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:.75rem;max-width:var(--maxw);margin:0 auto;padding:.75rem 1rem}
+    .brand{font-weight:700;color:var(--accent);font-size:1.2rem}
+    nav ul{display:flex;gap:.5rem;list-style:none;padding:0;margin:0}
+    nav a{display:inline-block;padding:.5rem .7rem;border-radius:8px;text-decoration:none;color:var(--text)}
+    nav a:hover, nav a:focus{box-shadow:0 0 0 4px var(--focus)}
+    .toggles{display:flex;gap:.5rem;align-items:center}
+    .switch{position:relative;width:46px;height:26px}
+    .switch input{display:none}
+    .slider{position:absolute;left:0;right:0;top:0;bottom:0;background:#ddd;border-radius:40px}
+    .slider:before{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:white;transition:transform .18s}
+    .switch input:checked + .slider{background:#4b5563}
+    .switch input:checked + .slider:before{transform:translateX(20px)}
+    main{padding:2rem 1rem}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start}
+    .hero .card{background:var(--card);border-radius:var(--radius);padding:1.25rem;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04)}
+    .hero h1{margin:.25rem 0;font-size:2rem}
+    .lead{color:var(--muted);line-height:1.4}
+    .hero img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block}
+    /* Contact placeholder */
+    .contact-box{margin-top:2rem;padding:1.25rem;border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card);border:1px solid rgba(0,0,0,0.04)}
+    .contact-box h3{margin-top:0}
+    footer{padding:1rem;text-align:center;color:var(--muted)}
+    /* responsive */
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr}
+      .hero img{height:260px}
+    }
+    @media (max-width:520px){
+      .header-inner{padding:.5rem}
+      nav ul{display:none}
+      .mobile-nav-btn{display:inline-block}
+    }
+    /* small utility */
+    .muted{color:var(--muted)}
+    .btn{background:var(--accent);color:white;padding:.5rem .75rem;border-radius:8px;border:0;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text)}
+    a.skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    a.skip:focus{left:12px;top:12px;width:auto;height:auto;padding:.5rem .75rem;background:var(--accent);color:white;border-radius:6px}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner container" role="banner">
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <div class="brand">Easy Dorm Recipes</div>
+        <nav aria-label="Main navigation">
+          <ul>
+            <li><a href="Recipe_index.html">Home</a></li>
+            <li><a href="Recipe_breakfast.html">Breakfast</a></li>
+            <li><a href="Recipe_lunch.html">Lunch</a></li>
+            <li><a href="Recipe_dinner.html">Dinner</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="toggles" aria-hidden="false">
+        <label title="Increase text size" style="display:flex;align-items:center;gap:.4rem">
+          <input id="text-toggle" type="checkbox" aria-label="Toggle large text"/>
+          <span class="btn ghost" style="font-size:.85rem;padding:.35rem .6rem">A+</span>
+        </label>
+
+        <label class="switch" title="Toggle dark mode">
+          <input id="dark-toggle" type="checkbox" aria-label="Toggle dark mode" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main">
+    <section class="hero" aria-labelledby="home-title">
+      <div class="card">
+        <h1 id="home-title">Easy Dorm Recipes — Quick, tasty, and stress-free</h1>
+        <p class="lead">Busy student life deserves delicious simplicity. Discover quick recipes designed for dorm kitchens — no fuss, minimal equipment, and under 10 minutes (mostly). Browse breakfast, lunch, or dinner ideas, check ingredients you already have, and print recipes for quick reference.</p>
+        <p class="muted">Tip: Use the ingredient tiles on each recipe page to see names on hover.</p>
+      </div>
+
+      <div class="card" aria-hidden="false">
+        <img src="Classwork/Images/homepage.jpg" alt="Assorted easy dishes" />
+      </div>
+    </section>
+
+    <section class="contact-box" aria-labelledby="contact-title">
+      <h3 id="contact-title">Contact</h3>
+      <form action="#" method="post" aria-label="Contact form (placeholder)">
+        <label for="name">Name</label><br/>
+        <input id="name" style="padding:.5rem;border-radius:8px;border:1px solid rgba(0,0,0,0.08);width:100%;max-width:420px"/>
+        <label for="Email">Email</label><br/>
+        <input id="Email" style="padding:.5rem;border-radius:8px;border:1px solid rgba(0,0,0,0.08);width:100%;max-width:420px"/>
+        <label for="message">Your Thoughts?</label><br/>
+        <input id="Email" style="padding:.5rem;border-radius:8px;border:1px solid rgba(0,0,0,0.08);width:100%;max-width:420px"/>
+        <div style="margin-top:.5rem">
+          <button class="btn" type="submit">Send</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <small>© Easy Dorm Recipes • For educational use</small>
+  </footer>
+
+  <script>
+    // persist and apply dark + text-size toggles
+    (function(){
+      const root = document.documentElement;
+      const darkToggle = document.getElementById('dark-toggle');
+      const textToggle = document.getElementById('text-toggle');
+
+      // restore
+      const dark = localStorage.getItem('edr_dark') === 'true';
+      const large = localStorage.getItem('edr_large') === 'true';
+      if(dark) root.classList.add('dark'), darkToggle.checked = true;
+      if(large) document.body.classList.add('large-text'), textToggle.checked = true;
+
+      darkToggle.addEventListener('change', e=>{
+        if(e.target.checked) root.classList.add('dark'); else root.classList.remove('dark');
+        localStorage.setItem('edr_dark', e.target.checked);
+      });
+      textToggle.addEventListener('change', e=>{
+        if(e.target.checked) document.body.classList.add('large-text'); else document.body.classList.remove('large-text');
+        localStorage.setItem('edr_large', e.target.checked);
+      });
+    })();
+  </script>
+</body>
+</html>

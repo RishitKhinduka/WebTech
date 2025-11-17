@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dinner — Easy Dorm Recipes</title>
+  <style>
+    :root{--bg:#fff;--card:#fff;--text:#0f1724;--muted:#6b7280;--accent:#d97706;--shadow:0 10px 30px rgba(2,6,23,0.06);--radius:12px}
+    :root.dark{--bg:#071023;--card:#071428;--text:#e6eef8;--muted:#9aa6b2;--accent:#f59e0b;--shadow:0 10px 30px rgba(3,6,12,0.6)}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;color:var(--text);background:var(--bg)}
+    .container{max-width:1100px;margin:0 auto;padding:1rem}
+    header{position:sticky;top:0;background:var(--card);border-bottom:1px solid rgba(0,0,0,.06)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem}
+    .recipe-layout{display:grid;grid-template-columns:1fr 420px;gap:1.25rem;align-items:start}
+    .card{background:var(--card);border-radius:12px;padding:1rem;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04)}
+    .ingredients-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin-top:1rem}
+    .ing-tile{position:relative;border-radius:10px;overflow:hidden;height:120px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s}
+    .ing-tile img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.05);transition:transform .25s}
+    .ing-label{position:absolute;left:0;right:0;bottom:0;padding:.5rem;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.55));color:white;font-weight:600;transform:translateY(110%);transition:transform .18s}
+    .ing-tile:hover .ing-label{transform:translateY(0)}
+    .ing-tile:hover img{transform:scale(1.12)}
+    .btn{background:var(--accent);color:white;padding:.5rem .75rem;border-radius:8px;border:0;cursor:pointer}
+    @media (max-width:920px){ .recipe-layout{grid-template-columns:1fr} .recipe-img{height:260px} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner container">
+      <div style="display:flex;gap:.75rem;align-items:center;font-weight:700;color:var(--accent)">Easy Dorm Recipes
+        <nav aria-label="Main">
+          <ul>
+            <li><a href="Recipe_index.html">Home</a></li>
+            <li><a href="Recipe_breakfast.html" >Breakfast</a></li>
+            <li><a href="Recipe_lunch.html">Lunch</a></li>
+            <li><a href="Recipe_dinner.html" aria-current="page">Dinner</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div>
+        <label title="Increase text size"><input id="text-toggle" type="checkbox" aria-label="Toggle larger text"/> A+</label>
+        <label title="Dark mode"><input id="dark-toggle" type="checkbox" aria-label="Toggle dark mode"/> Dark</label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="recipe-layout card" id="microwaved-quesadilla" aria-labelledby="mq-title">
+      <div>
+        <h1 id="mq-title">Microwaved Quesadilla</h1>
+        <div style="color:var(--muted)">1–2 servings • 1–2 minutes</div>
+
+        <div>
+          <strong>Ingredients</strong>
+          <div class="ingredients-grid" id="mq-ingredients"></div>
+        </div>
+
+        <div style="margin-top:1rem">
+          <strong>Instructions</strong>
+          <ol>
+            <li>Place one tortilla on a microwave-safe plate, sprinkle cheese and fillings, top with second tortilla.</li>
+            <li>Microwave 1–2 minutes until cheese melts. Slice and serve.</li>
+          </ol>
+        </div>
+
+        <div style="margin-top:1rem"><button class="btn" onclick="printRecipe('microwaved-quesadilla')">Print Recipe</button></div>
+      </div>
+
+      <aside class="recipe-img card" style="padding:0"><img src="https://images.unsplash.com/photo-1617196034232-8c3ec4f30b44?q=80&w=1200&auto=format&fit=crop" alt="Quesadilla" style="width:100%;height:100%;object-fit:cover;border-radius:12px"/></aside>
+    </article>
+
+    <article class="recipe-layout card" id="ramen-upgrade" aria-labelledby="rm-title" style="margin-top:1.25rem">
+      <div>
+        <h1 id="rm-title">10-Minute Ramen Upgrade</h1>
+        <div style="color:var(--muted)">1 serving • 10 minutes</div>
+
+        <div>
+          <strong>Ingredients</strong>
+          <div class="ingredients-grid" id="rm-ingredients"></div>
+        </div>
+
+        <div style="margin-top:1rem">
+          <strong>Instructions</strong>
+          <ol>
+            <li>Cook ramen as directed.</li>
+            <li>In last 2 minutes, crack egg into pot and stir to create ribbons. Turn off heat and stir in spinach. Mix seasoning, soy sauce, and sriracha to taste.</li>
+          </ol>
+        </div>
+
+        <div style="margin-top:1rem"><button class="btn" onclick="printRecipe('ramen-upgrade')">Print Recipe</button></div>
+      </div>
+
+      <aside class="recipe-img card" style="padding:0"><img src="https://images.unsplash.com/photo-1604908177522-14f2f1d6b5d3?q=80&w=1200&auto=format&fit=crop" alt="Ramen" style="width:100%;height:100%;object-fit:cover;border-radius:12px"/></aside>
+    </article>
+  </main>
+
+  <footer style="padding:1rem;text-align:center;color:var(--muted)"><small>© Easy Dorm Recipes</small></footer>
+
+  <script>
+    const RECIPES = {
+      'microwaved-quesadilla': {
+        ingredients:[
+          '2 tortillas',
+          'Shredded cheese',
+          'Optional fillings (beans, pre-cooked chicken, salsa)'
+        ]
+      },
+      'ramen-upgrade': {
+        ingredients:[
+          '1 package instant ramen',
+          '1 egg',
+          'Handful of spinach',
+          'Soy sauce',
+          'Sriracha'
+        ]
+      }
+    };
+
+    const ING_IMG = {
+      'tortilla':'https://images.unsplash.com/photo-1572441710565-8f5f9e3e8c7b?q=80&w=800&auto=format&fit=crop',
+      'cheese':'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop',
+      'beans':'https://images.unsplash.com/photo-1584270354949-2cea8b6a56d9?q=80&w=800&auto=format&fit=crop',
+      'ramen':'https://images.unsplash.com/photo-1604908177522-14f2f1d6b5d3?q=80&w=800&auto=format&fit=crop',
+      'egg':'https://images.unsplash.com/photo-1515488046-2d7a8f8f4b4c?q=80&w=800&auto=format&fit=crop',
+      'spinach':'https://images.unsplash.com/photo-1518972559570-1e3b3f4f1a69?q=80&w=800&auto=format&fit=crop'
+    };
+
+    function renderIngredients(containerId, items){
+      const container = document.getElementById(containerId); container.innerHTML='';
+      items.forEach(txt=>{
+        const btn = document.createElement('button'); btn.type='button'; btn.className='ing-tile';
+        const key = Object.keys(ING_IMG).find(k => txt.toLowerCase().includes(k)) || 'ramen';
+        const img = document.createElement('img'); img.src = ING_IMG[key]; img.alt = txt;
+        const label = document.createElement('div'); label.className='ing-label'; label.innerText = txt;
+        btn.appendChild(img); btn.appendChild(label);
+        btn.addEventListener('click', ()=> alert(txt));
+        container.appendChild(btn);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      renderIngredients('mq-ingredients', RECIPES['microwaved-quesadilla'].ingredients);
+      renderIngredients('rm-ingredients', RECIPES['ramen-upgrade'].ingredients);
+
+      // toggles
+      const root = document.documentElement;
+      const darkToggle = document.getElementById('dark-toggle');
+      const textToggle = document.getElementById('text-toggle');
+      const dark = localStorage.getItem('edr_dark') === 'true';
+      const large = localStorage.getItem('edr_large') === 'true';
+      if(dark) root.classList.add('dark'), darkToggle.checked = true;
+      if(large) document.body.classList.add('large-text'), textToggle.checked = true;
+      darkToggle.addEventListener('change', e=>{ if(e.target.checked) root.classList.add('dark'); else root.classList.remove('dark'); localStorage.setItem('edr_dark', e.target.checked); });
+      textToggle.addEventListener('change', e=>{ if(e.target.checked) document.body.classList.add('large-text'); else document.body.classList.remove('large-text'); localStorage.setItem('edr_large', e.target.checked); });
+    });
+
+    function printRecipe(id){
+      const node = document.getElementById(id);
+      if(!node) return;
+      const w = window.open('','_blank','width=700,height=900');
+      w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Print</title></head><body>');
+      w.document.write(node.innerHTML);
+      w.document.write('</body></html>');
+      w.document.close();
+      setTimeout(()=> w.print(), 300);
+    }
+  </script>
+</body>
+</html>
