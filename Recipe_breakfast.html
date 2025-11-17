@@ -1,411 +1,288 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Breakfast — Easy Dorm Recipes</title>
 
   <style>
-    /* -------- THEME VARIABLES (LIGHT + DARK) -------- */
-    :root{
-      --bg:#ffffff;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --accent:#d97706;
-      --shadow:0 10px 30px rgba(2, 6, 23, 0.06);
-      --radius:14px;
-      --maxw:1100px;
-    }
-    :root.dark{
-      --bg:#0b1220;
-      --card:#111827;
-      --text:#e2e8f0;
-      --muted:#94a3b8;
-      --accent:#f59e0b;
-      --shadow:0 10px 30px rgba(0,0,0,0.45);
+    /* ========== THEME VARIABLES (same as index) ========== */
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --accent: #d97706;
+      --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      --radius: 10px;
+      --max-width: 1000px;
     }
 
-    /* -------- BASE STYLES -------- */
-    body,html{
-      margin:0;
-      padding:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:var(--bg);
-      color:var(--text);
+    :root.dark {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .large-text{
-      font-size:1.12rem;
+    /* ========== GLOBAL ==========
+    All kept simple + identical to index page */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
 
-    .container{
-      max-width:var(--maxw);
-      margin:0 auto;
-      padding:1rem;
+    .large-text {
+      font-size: 1.15rem;
     }
 
-    /* -------- NAVBAR -------- */
-    header.site-header{
-      background:var(--card);
-      border-bottom:1px solid rgba(0,0,0,0.06);
-      position:sticky;
-      top:0;
-      z-index:50;
-      box-shadow:var(--shadow);
+    .container {
+      max-width: var(--max-width);
+      margin: auto;
+      padding: 1rem;
     }
 
-    .header-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:.8rem 1rem;
+    /* ========== NAVBAR (IDENTICAL TO INDEX) ========== */
+    header {
+      background: var(--card);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    .brand{
-      font-size:1.25rem;
-      font-weight:700;
-      color:var(--accent);
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
     }
 
-    nav ul{
-      list-style:none;
-      margin:0;
-      padding:0;
-      display:flex;
-      gap:.5rem;
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.75rem;
+      padding: 0;
+      margin: 0;
     }
 
-    nav a{
-      text-decoration:none;
-      color:var(--text);
-      padding:.5rem .75rem;
-      border-radius:8px;
-      font-weight:500;
-      transition:background .2s;
+    nav a {
+      text-decoration: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      color: var(--text);
     }
 
-    nav a:hover{
-      background:rgba(0,0,0,0.04);
+    nav a:hover {
+      background: rgba(0, 0, 0, 0.08);
     }
 
-    nav a[aria-current="page"]{
-      background:var(--accent);
-      color:white;
+    /* Toggle controls (copied exactly) */
+    .switch {
+      width: 40px;
+      height: 22px;
+      position: relative;
     }
 
-    .toggles{
-      display:flex;
-      align-items:center;
-      gap:.75rem;
+    .switch input {
+      display: none;
     }
 
-    /* -------- RECIPE CARD LAYOUT -------- */
-    .recipe-card{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:1.5rem;
-      margin-bottom:2rem;
-      box-shadow:var(--shadow);
-      display:grid;
-      grid-template-columns:1fr 380px;
-      gap:1.5rem;
-      align-items:start;
-      border:1px solid rgba(0,0,0,0.04);
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: 20px;
     }
 
-    h1{
-      margin:0 0 .4rem 0;
-      font-size:1.6rem;
+    .slider::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: 0.2s;
     }
 
-    .meta{
-      color:var(--muted);
-      margin-bottom:1rem;
+    .switch input:checked + .slider {
+      background: #4b5563;
     }
 
-    .recipe-img{
-      width:100%;
-      height:310px;
-      overflow:hidden;
-      border-radius:10px;
+    .switch input:checked + .slider::before {
+      transform: translateX(18px);
     }
 
-    .recipe-img img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:transform .25s ease;
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .recipe-img:hover img{
-      transform:scale(1.06);
+    /* ========== BREAKFAST RECIPE CARDS (kept simple) ========== */
+    .recipe-card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 1.25rem;
     }
 
-    /* -------- INGREDIENT GRID -------- */
-    .ingredients-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-      gap:1rem;
-      margin-top:.75rem;
+    .recipe-img img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: var(--radius);
     }
 
-    .ing-tile{
-      position:relative;
-      border-radius:10px;
-      overflow:hidden;
-      height:120px;
-      cursor:pointer;
-      background:#f1f5f9;
-      box-shadow:var(--shadow);
-      transition:transform .2s ease;
-      border:0;
-      padding:0;
-    }
-
-    .ing-tile img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transform:scale(1.06);
-      transition:transform .25s ease;
-    }
-
-    .ing-label{
-      position:absolute;
-      bottom:0;
-      left:0;
-      right:0;
-      padding:.55rem;
-      text-align:center;
-      color:white;
-      background:linear-gradient(180deg,transparent,rgba(0,0,0,0.65));
-      font-weight:600;
-      transform:translateY(110%);
-      transition:transform .2s ease;
-    }
-
-    .ing-tile:hover img{
-      transform:scale(1.15);
-    }
-
-    .ing-tile:hover .ing-label{
-      transform:translateY(0);
-    }
-
-    /* -------- ACTION BUTTON -------- */
-    .btn{
-      background:var(--accent);
-      color:white;
-      padding:.55rem .9rem;
-      border-radius:8px;
-      border:0;
-      cursor:pointer;
-      font-weight:600;
-      margin-top:1rem;
-    }
-
-    /* -------- RESPONSIVE -------- */
-    @media(max-width:900px){
-      .recipe-card{
-        grid-template-columns:1fr;
+    @media (max-width: 800px) {
+      .recipe-card {
+        grid-template-columns: 1fr;
       }
-      .recipe-img{
-        height:240px;
+      .recipe-img img {
+        height: 200px;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <header class="site-header">
-    <div class="header-inner container">
-      <div style="display:flex;align-items:center;gap:1rem;">
-        <div class="brand">Easy Dorm Recipes</div>
 
-        <nav aria-label="Main">
-          <ul>
-            <li><a href="Recipe_index.html">Home</a></li>
-            <li><a href="Recipe_breakfast.html" aria-current="page">Breakfast</a></li>
-            <li><a href="Recipe_lunch.html">Lunch</a></li>
-            <li><a href="Recipe_dinner.html">Dinner</a></li>
-          </ul>
-        </nav>
+  <!-- ========== NAVBAR (COPIED EXACTLY) ========== -->
+  <header>
+    <div class="nav-inner container">
+
+      <div class="brand" href="Recipe_index.html" style="font-weight:bold; color:var(--accent);">
+        Easy Dorm Recipes
       </div>
 
-      <div class="toggles">
-        <label><input type="checkbox" id="text-toggle"> A+</label>
-        <label><input type="checkbox" id="dark-toggle"> Dark</label>
+      <nav>
+        <ul>
+          <li><a href="Recipe_index.html">Home</a></li>
+          <li><a href="Recipe_breakfast.html" aria-current="page">Breakfast</a></li>
+          <li><a href="Recipe_lunch.html">Lunch</a></li>
+          <li><a href="Recipe_dinner.html">Dinner</a></li>
+        </ul>
+      </nav>
+
+      <div class="toggle-row">
+        <label>
+          <input type="checkbox" id="text-toggle">
+          <span style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:6px; cursor:pointer;">A+</span>
+        </label>
+
+        <label class="switch">
+          <input type="checkbox" id="dark-toggle">
+          <span class="slider"></span>
+        </label>
       </div>
+
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- ========== MAIN CONTENT ========== -->
   <main class="container">
 
-    <!-- OVERNIGHT OATS -->
-    <article class="recipe-card" id="overnight-oats">
+    <!-- Recipe 1 -->
+    <article class="recipe-card">
       <div>
-        <h1>Overnight Oats</h1>
-        <div class="meta">1 serving • 2 minutes prep (4+ hr chill)</div>
+        <h2>Overnight Oats</h2>
+        <p class="meta" style="color:var(--muted)">1 serving • 2 min prep (4+ hr chill)</p>
 
-        <strong>Ingredients</strong>
-        <div class="ingredients-grid" id="ov-ingredients"></div>
+        <h3>Ingredients</h3>
+        <ul>
+          <li>½ cup rolled oats</li>
+          <li>½ cup milk of choice</li>
+          <li>1 tbsp chia seeds</li>
+          <li>1 tsp maple syrup</li>
+          <li>Pinch of salt</li>
+        </ul>
 
-        <strong style="display:block;margin-top:1rem;">Instructions</strong>
+        <h3>Instructions</h3>
         <ol>
-          <li>Add oats, milk, chia seeds, maple syrup, and salt into a jar.</li>
-          <li>Mix thoroughly.</li>
-          <li>Refrigerate for at least 4 hours.</li>
-          <li>Stir and enjoy cold (add milk if too thick).</li>
+          <li>Mix all ingredients in a jar.</li>
+          <li>Refrigerate at least 4 hours.</li>
+          <li>Stir and enjoy cold.</li>
         </ol>
-
-        <button class="btn" onclick="printRecipe('overnight-oats')">Print Recipe</button>
       </div>
 
-      <aside class="recipe-img">
-        <img src="https://images.unsplash.com/photo-1509475826633-fed577a2c71b?q=80&w=1200&auto=format&fit=crop" alt="Overnight oats">
-      </aside>
+      <div class="recipe-img">
+        <img src="https://images.unsplash.com/photo-1509475826633-fed577a2c71b?q=80&w=1200&auto=format&fit=crop" alt="">
+      </div>
     </article>
 
-    <!-- AVOCADO TOAST -->
-    <article class="recipe-card" id="avocado-toast">
+    <!-- Recipe 2 -->
+    <article class="recipe-card">
       <div>
-        <h1>Avocado Toast</h1>
-        <div class="meta">1 serving • ~5 minutes</div>
+        <h2>Avocado Toast</h2>
+        <p class="meta" style="color:var(--muted)">1 serving • ~5 minutes</p>
 
-        <strong>Ingredients</strong>
-        <div class="ingredients-grid" id="av-ingredients"></div>
+        <h3>Ingredients</h3>
+        <ul>
+          <li>1 slice of bread</li>
+          <li>½ ripe avocado</li>
+          <li>Salt</li>
+          <li>Lemon (optional)</li>
+          <li>Olive oil</li>
+        </ul>
 
-        <strong style="display:block;margin-top:1rem;">Instructions</strong>
+        <h3>Instructions</h3>
         <ol>
           <li>Toast bread.</li>
-          <li>Mash avocado and season with salt + lemon.</li>
-          <li>Spread and drizzle with olive oil.</li>
+          <li>Mash avocado with salt + lemon.</li>
+          <li>Spread, drizzle with olive oil.</li>
         </ol>
-
-        <button class="btn" onclick="printRecipe('avocado-toast')">Print Recipe</button>
       </div>
 
-      <aside class="recipe-img">
-        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=1200&auto=format&fit=crop" alt="Avocado toast">
-      </aside>
+      <div class="recipe-img">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=1200&auto=format&fit=crop" alt="">
+      </div>
     </article>
 
   </main>
 
-  <footer style="text-align:center;color:var(--muted);padding:1rem;">
-    <small>© Easy Dorm Recipes</small>
+  <footer class="container" style="text-align:center; margin-top:2rem; color:var(--muted);">
+    © Easy Dorm Recipes
   </footer>
 
-
-  <!-- JAVASCRIPT -->
+  <!-- ========== SAME JAVASCRIPT AS INDEX ========== -->
   <script>
-    const RECIPES = {
-      'overnight-oats': {
-        ingredients:[
-          '½ cup Old-Fashioned Rolled Oats',
-          '½ cup Milk of choice',
-          '1 tbsp Chia Seeds',
-          '1 tsp Maple Syrup or Honey',
-          'Pinch of Salt'
-        ]
-      },
-      'avocado-toast': {
-        ingredients:[
-          '½ ripe Avocado',
-          '1 slice Bread',
-          'Pinch of Salt',
-          'Lemon juice (optional)',
-          'Drizzle Olive Oil'
-        ]
-      }
-    };
+    const root = document.documentElement;
+    const darkToggle = document.getElementById("dark-toggle");
+    const textToggle = document.getElementById("text-toggle");
 
-    const ING_IMG = {
-      oats:'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop',
-      milk:'https://images.unsplash.com/photo-1514986888952-8cd320577b47?q=80&w=800&auto=format&fit=crop',
-      chia:'https://images.unsplash.com/photo-1589388926168-0d7d4b1faa0d?q=80&w=800&auto=format&fit=crop',
-      maple:'https://images.unsplash.com/photo-1505575967451-3e5b5a3e1d86?q=80&w=800&auto=format&fit=crop',
-      salt:'https://images.unsplash.com/photo-1505576391880-0d3e2b637b1b?q=80&w=800&auto=format&fit=crop',
-      avocado:'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=800&auto=format&fit=crop',
-      bread:'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
-      lemon:'https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=800&auto=format&fit=crop',
-      olive:'https://images.unsplash.com/photo-1505575967451-3e5b5a3e1d86?q=80&w=800&auto=format&fit=crop'
-    };
+    const savedDark = localStorage.getItem("dark-mode") === "true";
+    const savedLarge = localStorage.getItem("large-text") === "true";
 
-    function renderIngredients(containerId, items){
-      const box = document.getElementById(containerId);
-      box.innerHTML = "";
-
-      items.forEach(txt => {
-        const tile = document.createElement("button");
-        tile.className = "ing-tile";
-
-        const key = Object.keys(ING_IMG).find(k => txt.toLowerCase().includes(k)) || "bread";
-
-        const img = document.createElement("img");
-        img.src = ING_IMG[key];
-        img.alt = txt;
-
-        const lbl = document.createElement("div");
-        lbl.className = "ing-label";
-        lbl.textContent = txt;
-
-        tile.appendChild(img);
-        tile.appendChild(lbl);
-
-        tile.addEventListener("click", () => alert(txt));
-
-        box.appendChild(tile);
-      });
+    if (savedDark) {
+      root.classList.add("dark");
+      darkToggle.checked = true;
     }
 
-    // Populate grids
-    document.addEventListener("DOMContentLoaded", () => {
-      renderIngredients("ov-ingredients", RECIPES["overnight-oats"].ingredients);
-      renderIngredients("av-ingredients", RECIPES["avocado-toast"].ingredients);
+    if (savedLarge) {
+      document.body.classList.add("large-text");
+      textToggle.checked = true;
+    }
 
-      // Toggles
-      const root = document.documentElement;
-      const darkT = document.getElementById("dark-toggle");
-      const textT = document.getElementById("text-toggle");
-
-      const dark = localStorage.getItem("edr_dark") === "true";
-      const large = localStorage.getItem("edr_large") === "true";
-
-      if(dark) root.classList.add("dark"), darkT.checked = true;
-      if(large) document.body.classList.add("large-text"), textT.checked = true;
-
-      darkT.addEventListener("change", e => {
-        e.target.checked ? root.classList.add("dark") : root.classList.remove("dark");
-        localStorage.setItem("edr_dark", e.target.checked);
-      });
-
-      textT.addEventListener("change", e => {
-        e.target.checked ? document.body.classList.add("large-text") : document.body.classList.remove("large-text");
-        localStorage.setItem("edr_large", e.target.checked);
-      });
+    darkToggle.addEventListener("change", () => {
+      root.classList.toggle("dark");
+      localStorage.setItem("dark-mode", darkToggle.checked);
     });
 
-    // Print helper
-    function printRecipe(id){
-  const section = document.getElementById(id);
-  const win = window.open("", "_blank", "width=700,height=900");
-
-  win.document.write(`
-    <html>
-    <head><title>Print</title></head>
-    <body style="font-family:Arial;padding:20px;">
-      ${section.innerHTML}
-    <\/body>
-    <\/html>
-  `);
-
-  win.document.close();
-  setTimeout(() => win.print(), 300);
-}
+    textToggle.addEventListener("change", () => {
+      document.body.classList.toggle("large-text");
+      localStorage.setItem("large-text", textToggle.checked);
+    });
   </script>
+
 </body>
 </html>

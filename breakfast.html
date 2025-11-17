@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dinner — Easy Dorm Recipes</title>
+  <title>Breakfast — Easy Dorm Recipes</title>
+
   <style>
-    /* THEME VARIABLES */
+    /* ========== THEME VARIABLES (same as index) ========== */
     :root {
       --bg: #ffffff;
       --card: #ffffff;
@@ -26,6 +27,8 @@
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
+    /* ========== GLOBAL ==========
+    All kept simple + identical to index page */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -43,6 +46,7 @@
       padding: 1rem;
     }
 
+    /* ========== NAVBAR (IDENTICAL TO INDEX) ========== */
     header {
       background: var(--card);
       box-shadow: var(--shadow);
@@ -77,6 +81,7 @@
       background: rgba(0, 0, 0, 0.08);
     }
 
+    /* Toggle controls (copied exactly) */
     .switch {
       width: 40px;
       height: 22px;
@@ -106,11 +111,11 @@
       transition: 0.2s;
     }
 
-    .switch input:checked+.slider {
+    .switch input:checked + .slider {
       background: #4b5563;
     }
 
-    .switch input:checked+.slider::before {
+    .switch input:checked + .slider::before {
       transform: translateX(18px);
     }
 
@@ -120,7 +125,7 @@
       gap: 0.75rem;
     }
 
-    /* Recipe cards */
+    /* ========== BREAKFAST RECIPE CARDS (kept simple) ========== */
     .recipe-card {
       background: var(--card);
       padding: 1.5rem;
@@ -143,7 +148,6 @@
       .recipe-card {
         grid-template-columns: 1fr;
       }
-
       .recipe-img img {
         height: 200px;
       }
@@ -153,79 +157,94 @@
 
 <body>
 
+  <!-- ========== NAVBAR (COPIED EXACTLY) ========== -->
   <header>
     <div class="nav-inner container">
-      <div class="brand" href="Recipe_index.html" style="font-weight:bold; color:var(--accent);">Easy Dorm Recipes</div>
+
+      <div class="brand" style="font-weight:bold; color:var(--accent);">
+        Easy Dorm Recipes
+      </div>
+
       <nav>
         <ul>
           <li><a href="Recipe_index.html">Home</a></li>
-          <li><a href="Recipe_breakfast.html">Breakfast</a></li>
+          <li><a href="Recipe_breakfast.html" aria-current="page">Breakfast</a></li>
           <li><a href="Recipe_lunch.html">Lunch</a></li>
-          <li><a href="Recipe_dinner.html" aria-current="page">Dinner</a></li>
+          <li><a href="Recipe_dinner.html">Dinner</a></li>
         </ul>
       </nav>
+
       <div class="toggle-row">
         <label>
           <input type="checkbox" id="text-toggle">
           <span style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:6px; cursor:pointer;">A+</span>
         </label>
+
         <label class="switch">
           <input type="checkbox" id="dark-toggle">
           <span class="slider"></span>
         </label>
       </div>
+
     </div>
   </header>
 
+  <!-- ========== MAIN CONTENT ========== -->
   <main class="container">
 
-    <!-- Microwaved Quesadilla -->
+    <!-- Recipe 1 -->
     <article class="recipe-card">
       <div>
-        <h2>Microwaved Quesadilla</h2>
-        <p style="color:var(--muted)">1–2 servings • 1–2 minutes</p>
+        <h2>Overnight Oats</h2>
+        <p class="meta" style="color:var(--muted)">1 serving • 2 min prep (4+ hr chill)</p>
 
-        <strong>Ingredients</strong>
+        <h3>Ingredients</h3>
         <ul>
-          <li>2 tortillas</li>
-          <li>Shredded cheese</li>
-          <li>Optional fillings (beans, pre-cooked chicken, salsa)</li>
+          <li>½ cup rolled oats</li>
+          <li>½ cup milk of choice</li>
+          <li>1 tbsp chia seeds</li>
+          <li>1 tsp maple syrup</li>
+          <li>Pinch of salt</li>
         </ul>
 
-        <strong>Instructions</strong>
+        <h3>Instructions</h3>
         <ol>
-          <li>Place one tortilla on a microwave-safe plate, sprinkle cheese and fillings, top with second tortilla.</li>
-          <li>Microwave 1–2 minutes until cheese melts. Slice and serve.</li>
+          <li>Mix all ingredients in a jar.</li>
+          <li>Refrigerate at least 4 hours.</li>
+          <li>Stir and enjoy cold.</li>
         </ol>
       </div>
+
       <div class="recipe-img">
-        <img src="https://images.unsplash.com/photo-1617196034232-8c3ec4f30b44?q=80&w=1200&auto=format&fit=crop" alt="Microwaved Quesadilla">
+        <img src="https://images.unsplash.com/photo-1509475826633-fed577a2c71b?q=80&w=1200&auto=format&fit=crop" alt="">
       </div>
     </article>
 
-    <!-- 10-Minute Ramen Upgrade -->
+    <!-- Recipe 2 -->
     <article class="recipe-card">
       <div>
-        <h2>10-Minute Ramen Upgrade</h2>
-        <p style="color:var(--muted)">1 serving • 10 minutes</p>
+        <h2>Avocado Toast</h2>
+        <p class="meta" style="color:var(--muted)">1 serving • ~5 minutes</p>
 
-        <strong>Ingredients</strong>
+        <h3>Ingredients</h3>
         <ul>
-          <li>1 package instant ramen</li>
-          <li>1 egg</li>
-          <li>Handful of spinach</li>
-          <li>Soy sauce</li>
-          <li>Sriracha</li>
+          <li>1 slice of bread</li>
+          <li>½ ripe avocado</li>
+          <li>Salt</li>
+          <li>Lemon (optional)</li>
+          <li>Olive oil</li>
         </ul>
 
-        <strong>Instructions</strong>
+        <h3>Instructions</h3>
         <ol>
-          <li>Cook ramen as directed.</li>
-          <li>In last 2 minutes, crack egg into pot and stir to create ribbons. Turn off heat and stir in spinach. Mix seasoning, soy sauce, and sriracha to taste.</li>
+          <li>Toast bread.</li>
+          <li>Mash avocado with salt + lemon.</li>
+          <li>Spread, drizzle with olive oil.</li>
         </ol>
       </div>
+
       <div class="recipe-img">
-        <img src="https://images.unsplash.com/photo-1604908177522-14f2f1d6b5d3?q=80&w=1200&auto=format&fit=crop" alt="10-Minute Ramen Upgrade">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=1200&auto=format&fit=crop" alt="">
       </div>
     </article>
 
@@ -235,16 +254,21 @@
     © Easy Dorm Recipes
   </footer>
 
+  <!-- ========== SAME JAVASCRIPT AS INDEX ========== -->
   <script>
     const root = document.documentElement;
     const darkToggle = document.getElementById("dark-toggle");
     const textToggle = document.getElementById("text-toggle");
 
-    if (localStorage.getItem("dark-mode") === "true") {
+    const savedDark = localStorage.getItem("dark-mode") === "true";
+    const savedLarge = localStorage.getItem("large-text") === "true";
+
+    if (savedDark) {
       root.classList.add("dark");
       darkToggle.checked = true;
     }
-    if (localStorage.getItem("large-text") === "true") {
+
+    if (savedLarge) {
       document.body.classList.add("large-text");
       textToggle.checked = true;
     }

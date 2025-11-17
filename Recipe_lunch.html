@@ -1,340 +1,260 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lunch — Easy Dorm Recipes</title>
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lunch — Easy Dorm Recipes</title>
   <style>
-    /* -------- THEME VARIABLES -------- */
+    /* THEME VARIABLES */
     :root {
-      --bg: #fff;
-      --card: #fff;
-      --text: #0f1724;
+      --bg: #ffffff;
+      --card: #ffffff;
+      --text: #1a1a1a;
       --muted: #6b7280;
       --accent: #d97706;
-      --shadow: 0 10px 30px rgba(2,6,23,0.06);
-      --radius: 12px;
-    }
-    :root.dark {
-      --bg: #071023;
-      --card: #071428;
-      --text: #e6eef8;
-      --muted: #9aa6b2;
-      --accent: #f59e0b;
-      --shadow: 0 10px 30px rgba(3,6,12,0.6);
+      --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      --radius: 10px;
+      --max-width: 1000px;
     }
 
-    html, body {
-      height: 100%;
+    :root.dark {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
       margin: 0;
-      font-family: Inter, system-ui, Arial;
-      color: var(--text);
+      font-family: Arial, sans-serif;
       background: var(--bg);
+      color: var(--text);
+    }
+
+    .large-text {
+      font-size: 1.15rem;
     }
 
     .container {
-      max-width: 1100px;
-      margin: 0 auto;
+      max-width: var(--max-width);
+      margin: auto;
       padding: 1rem;
     }
 
     header {
+      background: var(--card);
+      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
-      background: var(--card);
-      border-bottom: 1px solid rgba(0,0,0,.06);
-      z-index: 40;
+      z-index: 10;
     }
 
-    .header-inner {
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: .75rem 1rem;
+      padding: 0.75rem 1rem;
     }
 
     nav ul {
       display: flex;
-      gap: .5rem;
       list-style: none;
+      gap: 0.75rem;
       padding: 0;
       margin: 0;
     }
 
     nav a {
       text-decoration: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
       color: var(--text);
-      font-weight: 500;
     }
 
-    nav a[aria-current="page"] {
-      color: var(--accent);
-      font-weight: 700;
+    nav a:hover {
+      background: rgba(0, 0, 0, 0.08);
     }
 
-    .recipe-layout {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 1.25rem;
-      align-items: start;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 1rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(0,0,0,0.04);
-    }
-
-    .ingredients-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .ing-tile {
+    .switch {
+      width: 40px;
+      height: 22px;
       position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 120px;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: 20px;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: 0.2s;
+    }
+
+    .switch input:checked+.slider {
+      background: #4b5563;
+    }
+
+    .switch input:checked+.slider::before {
+      transform: translateX(18px);
+    }
+
+    .toggle-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: #f3f4f6;
+      gap: 0.75rem;
+    }
+
+    /* Recipe cards (same as breakfast) */
+    .recipe-card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      cursor: pointer;
-      transition: transform .2s ease;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 1.25rem;
     }
 
-    .ing-tile img {
+    .recipe-img img {
       width: 100%;
-      height: 100%;
+      height: 260px;
       object-fit: cover;
-      display: block;
-      transform: scale(1.05);
-      transition: transform .25s;
+      border-radius: var(--radius);
     }
 
-    .ing-label {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: .5rem;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.55));
-      color: white;
-      font-weight: 600;
-      transform: translateY(110%);
-      transition: transform .18s;
-    }
-
-    .ing-tile:hover .ing-label {
-      transform: translateY(0);
-    }
-
-    .ing-tile:hover img {
-      transform: scale(1.12);
-    }
-
-    .btn {
-      background: var(--accent);
-      color: white;
-      padding: .5rem .75rem;
-      border-radius: 8px;
-      border: 0;
-      cursor: pointer;
-    }
-
-    @media (max-width:920px) {
-      .recipe-layout {
+    @media (max-width: 800px) {
+      .recipe-card {
         grid-template-columns: 1fr;
       }
-      .recipe-img {
-        height: 260px;
+      .recipe-img img {
+        height: 200px;
       }
-    }
-
-    .recipe-img {
-      padding: 0;
-    }
-
-    .large-text {
-      font-size: 1.15rem;
     }
   </style>
 </head>
+
 <body>
+
   <header>
-    <div class="header-inner container">
-      <div style="display:flex;gap:.75rem;align-items:center">
-        <div style="font-weight:700;color:var(--accent)">Easy Dorm Recipes</div>
-        <nav aria-label="Main">
-          <ul>
-            <li><a href="Recipe_index.html">Home</a></li>
-            <li><a href="Recipe_breakfast.html">Breakfast</a></li>
-            <li><a href="Recipe_lunch.html" aria-current="page">Lunch</a></li>
-            <li><a href="Recipe_dinner.html">Dinner</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div>
-        <label title="Increase text size">
-          <input id="text-toggle" type="checkbox" aria-label="Toggle larger text"/> A+
+    <div class="nav-inner container">
+      <div class="brand" href="Recipe_index.html" style="font-weight:bold; color:var(--accent);">Easy Dorm Recipes</div>
+      <nav>
+        <ul>
+          <li><a href="Recipe_index.html">Home</a></li>
+          <li><a href="Recipe_breakfast.html">Breakfast</a></li>
+          <li><a href="Recipe_lunch.html" aria-current="page">Lunch</a></li>
+          <li><a href="Recipe_dinner.html">Dinner</a></li>
+        </ul>
+      </nav>
+      <div class="toggle-row">
+        <label>
+          <input type="checkbox" id="text-toggle">
+          <span style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:6px; cursor:pointer;">A+</span>
         </label>
-        <label title="Dark mode" style="margin-left:.5rem">
-          <input id="dark-toggle" type="checkbox" aria-label="Toggle dark mode"/> Dark
+        <label class="switch">
+          <input type="checkbox" id="dark-toggle">
+          <span class="slider"></span>
         </label>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- Chicken Salad Recipe -->
-    <article class="recipe-layout card" id="chicken-salad" aria-labelledby="ch-title">
+
+    <!-- Chicken Salad -->
+    <article class="recipe-card">
       <div>
-        <h1 id="ch-title">Chicken Salad</h1>
-        <div class="meta" style="color:var(--muted)">2–3 servings • 10 minutes</div>
-
-        <strong>Ingredients</strong>
-        <div class="ingredients-grid" id="ch-ingredients"></div>
-
-        <strong style="margin-top:1rem;display:block;">Instructions</strong>
+        <h2>Chicken Salad</h2>
+        <p class="meta" style="color:var(--muted)">2–3 servings • 10 minutes</p>
+        <h3>Ingredients</h3>
+        <ul>
+          <li>2 cups Cooked Chicken</li>
+          <li>1/3 cup Mayonnaise</li>
+          <li>1 stalk Celery, finely chopped</li>
+          <li>1 tbsp Red Onion, finely chopped</li>
+          <li>Salt & Black Pepper</li>
+        </ul>
+        <h3>Instructions</h3>
         <ol>
           <li>Combine chicken, mayonnaise, celery, and red onion in a bowl.</li>
           <li>Mix until evenly combined.</li>
           <li>Season with salt and pepper; chill or serve immediately.</li>
         </ol>
-
-        <button class="btn" style="margin-top:1rem;" onclick="printRecipe('chicken-salad')">Print Recipe</button>
       </div>
-      <aside class="recipe-img card">
-        <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36?q=80&w=1200&auto=format&fit=crop" alt="Chicken salad"/>
-      </aside>
+      <div class="recipe-img">
+        <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36?q=80&w=1200&auto=format&fit=crop" alt="">
+      </div>
     </article>
 
-    <!-- Mozzarella Toast Recipe -->
-    <article class="recipe-layout card" id="mozzarella-toast" aria-labelledby="mz-title" style="margin-top:1.25rem">
+    <!-- Mozzarella Toast -->
+    <article class="recipe-card">
       <div>
-        <h1 id="mz-title">Mozzarella Toast</h1>
-        <div style="color:var(--muted)">1 serving • 5–10 minutes</div>
-
-        <strong>Ingredients</strong>
-        <div class="ingredients-grid" id="mz-ingredients"></div>
-
-        <strong style="margin-top:1rem;display:block;">Instructions</strong>
+        <h2>Mozzarella Toast</h2>
+        <p class="meta" style="color:var(--muted)">1 serving • 5–10 minutes</p>
+        <h3>Ingredients</h3>
+        <ul>
+          <li>1 slice bread</li>
+          <li>2-3 slices Fresh Mozzarella</li>
+          <li>1 tbsp Pesto or drizzle Olive Oil</li>
+          <li>Pinch of Salt</li>
+          <li>Dried Italian Herbs (optional)</li>
+        </ul>
+        <h3>Instructions</h3>
         <ol>
           <li>Toast bread, top with mozzarella and pesto/oil, season, and broil until cheese melts.</li>
         </ol>
-
-        <button class="btn" style="margin-top:1rem;" onclick="printRecipe('mozzarella-toast')">Print Recipe</button>
       </div>
-      <aside class="recipe-img card">
-        <img src="https://images.unsplash.com/photo-1541599540903-216a46caad36?q=80&w=1200&auto=format&fit=crop" alt="Mozzarella toast"/>
-      </aside>
+      <div class="recipe-img">
+        <img src="https://images.unsplash.com/photo-1541599540903-216a46caad36?q=80&w=1200&auto=format&fit=crop" alt="">
+      </div>
     </article>
+
   </main>
 
-  <footer style="padding:1rem;text-align:center;color:var(--muted)">
-    <small>© Easy Dorm Recipes</small>
+  <footer class="container" style="text-align:center; margin-top:2rem; color:var(--muted);">
+    © Easy Dorm Recipes
   </footer>
 
   <script>
-    const RECIPES = {
-      'chicken-salad': {
-        ingredients:[
-          '2 cups Cooked Chicken',
-          '1/3 cup Mayonnaise',
-          '1 stalk Celery, finely chopped',
-          '1 tbsp Red Onion, finely chopped',
-          'Salt & Black Pepper'
-        ]
-      },
-      'mozzarella-toast': {
-        ingredients:[
-          '1 slice bread',
-          '2-3 slices Fresh Mozzarella',
-          '1 tbsp Pesto or drizzle Olive Oil',
-          'Pinch of Salt',
-          'Dried Italian Herbs (optional)'
-        ]
-      }
-    };
+    const root = document.documentElement;
+    const darkToggle = document.getElementById("dark-toggle");
+    const textToggle = document.getElementById("text-toggle");
 
-    const ING_IMG = {
-      'chicken':'https://images.unsplash.com/photo-1514516870922-1c6b9f8f4f55?q=80&w=800&auto=format&fit=crop',
-      'mayonnaise':'https://images.unsplash.com/photo-1589308078058-8263a9b6f6f2?q=80&w=800&auto=format&fit=crop',
-      'celery':'https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop',
-      'onion':'https://images.unsplash.com/photo-1604908177522-14f2f1d6b5d3?q=80&w=800&auto=format&fit=crop',
-      'bread':'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
-      'mozzarella':'https://images.unsplash.com/photo-1547592180-3f2f966fe8b3?q=80&w=800&auto=format&fit=crop',
-      'pesto':'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop'
-    };
-
-    function renderIngredients(containerId, items){
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      items.forEach(txt => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'ing-tile';
-        const key = Object.keys(ING_IMG).find(k => txt.toLowerCase().includes(k)) || 'bread';
-        const img = document.createElement('img');
-        img.src = ING_IMG[key];
-        img.alt = txt;
-        const label = document.createElement('div');
-        label.className = 'ing-label';
-        label.innerText = txt;
-        btn.appendChild(img);
-        btn.appendChild(label);
-        btn.addEventListener('click', ()=> alert(txt));
-        container.appendChild(btn);
-      });
+    if (localStorage.getItem("dark-mode") === "true") {
+      root.classList.add("dark");
+      darkToggle.checked = true;
+    }
+    if (localStorage.getItem("large-text") === "true") {
+      document.body.classList.add("large-text");
+      textToggle.checked = true;
     }
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-      renderIngredients('ch-ingredients', RECIPES['chicken-salad'].ingredients);
-      renderIngredients('mz-ingredients', RECIPES['mozzarella-toast'].ingredients);
-
-      const root = document.documentElement;
-      const darkToggle = document.getElementById('dark-toggle');
-      const textToggle = document.getElementById('text-toggle');
-
-      // load saved preferences
-      const dark = localStorage.getItem('edr_dark') === 'true';
-      const large = localStorage.getItem('edr_large') === 'true';
-      if(dark) root.classList.add('dark'), darkToggle.checked = true;
-      if(large) document.body.classList.add('large-text'), textToggle.checked = true;
-
-      darkToggle.addEventListener('change', e=>{
-        root.classList.toggle('dark', e.target.checked);
-        localStorage.setItem('edr_dark', e.target.checked);
-      });
-
-      textToggle.addEventListener('change', e=>{
-        document.body.classList.toggle('large-text', e.target.checked);
-        localStorage.setItem('edr_large', e.target.checked);
-      });
+    darkToggle.addEventListener("change", () => {
+      root.classList.toggle("dark");
+      localStorage.setItem("dark-mode", darkToggle.checked);
     });
 
-   function printRecipe(id){
-  const section = document.getElementById(id);
-  const win = window.open("", "_blank", "width=700,height=900");
-
-  win.document.write(`
-    <html>
-    <head><title>Print</title></head>
-    <body style="font-family:Arial;padding:20px;">
-      ${section.innerHTML}
-    <\/body>
-    <\/html>
-  `);
-
-  win.document.close();
-  setTimeout(() => win.print(), 300);
-}
+    textToggle.addEventListener("change", () => {
+      document.body.classList.toggle("large-text");
+      localStorage.setItem("large-text", textToggle.checked);
+    });
   </script>
 </body>
 </html>
