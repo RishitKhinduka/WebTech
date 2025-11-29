@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Car Knowledge Quiz</title>
+
+  <style>
+   body {
+    background-size: cover;
+    color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+
+
+ h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      text-decoration-line: underline;
+        text-decoration-style: wavy;
+        color: #3a3a3a;
+    }
+
+ .quiz-container {
+      max-width: 700px;
+      margin: auto;
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .question-card {
+background: #2a2a2a;
+padding: 15px;
+margin-bottom: 15px;
+border-radius: 10px;
+    }
+
+ button {
+width: 100%;
+padding: 12px;
+background: #3a3a3a;
+color: white;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-size: 16px;
+    }
+
+ button:hover {
+background: #505050;
+    }
+
+ #result {
+margin-top: 20px;
+font-size: 20px;
+text-align: center;
+font-weight: bold;
+    }
+
+ #message {
+text-align: center;
+margin-top: 5px;
+font-size: 18px;
+color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+<body style="background-image: url('images/cards/car-bg.jpg'); 
+background-size: cover; background-repeat: no-repeat;"></body>
+<h1>Car Knowledge Quiz</h1>
+<div class="quiz-container" id="quiz"></div>
+<button id="submit-btn">Submit Quiz</button>
+<div id="result"></div>
+<div id="message"></div>
+<script src="scripts/hw3-4.js"></script>
+</body>
+</html>
